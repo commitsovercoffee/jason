@@ -68,9 +68,17 @@
 	}
 </script>
 
-<main>
+<main
+	class="prose print:m-0 max-w-screen-lg mx-auto -mt-32 px-6 py-8 flex flex-col space-y-6 font-inter bg-white print:shadow-none shadow-lg"
+>
+	<a class="p-2 border shadow" href="/resume.json" download="resume.json">
+		<button>Download Resume</button>
+	</a>
+
 	<!-- File input to handle JSON uploads -->
-	<input type="file" accept=".json" on:change={handleJsonChange} />
+	<input class="border shadow p-2" type="file" accept=".json" on:change={handleJsonChange} />
+
+	<button class="p-2 border shadow" on:click={loadResumeJson}>Reset</button>
 
 	<!-- Use utility function to get nested property safely -->
 	<h1 class="font-inter font-light">
