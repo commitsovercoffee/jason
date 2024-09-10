@@ -1,16 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 
-	// Your app state object
-	let appState = {
-		resumeData: null
-	};
+	let resumeData = null;
 
-	// Simulating a function to check for saved data in local storage
+	// Function to check for saved data in local storage
 	function checkSavedData() {
 		const savedData = localStorage.getItem('resumeData');
 		if (savedData) {
-			appState.resumeData = JSON.parse(savedData);
+			resumeData = JSON.parse(savedData);
 			return true;
 		}
 		return false;
@@ -31,7 +28,7 @@
 				throw new Error('Failed to fetch resume.json');
 			}
 			const jsonData = await response.json();
-			appState.resumeData = jsonData;
+			resumeData = jsonData;
 
 			// Optionally, save the loaded data into localStorage
 			localStorage.setItem('resumeData', JSON.stringify(jsonData));
@@ -40,6 +37,7 @@
 		}
 	}
 
+	// Function to handle JSON file changes
 	function handleJsonChange(event) {
 		const file = event.target.files[0];
 
@@ -48,7 +46,10 @@
 			reader.onload = () => {
 				try {
 					const jsonData = JSON.parse(reader.result);
-					appState.resumeData = jsonData; // Assuming you want to store the JSON data in appState
+					resumeData = jsonData;
+
+					// Optionally, save the uploaded data into localStorage
+					localStorage.setItem('resumeData', JSON.stringify(jsonData));
 				} catch (error) {
 					alert('Error parsing JSON file. Please ensure the file contains valid JSON.');
 				}
@@ -58,27 +59,24 @@
 			alert('Please select a valid JSON file.');
 		}
 	}
+
+	// Safe access to nested properties
+	function getNestedProperty(obj, path, defaultValue = '') {
+		return path
+			.split('.')
+			.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : defaultValue), obj);
+	}
 </script>
 
 <main>
-	<div class="flex flex-row items-center print:space-x-0 space-x-4">
-		<button class="p-2 bg-red-200" on:click={loadResumeJson}> Reset </button>
-		<button class="p-2 bg-sky-200" on:click={() => document.getElementById('jsonInput').click()}>
-			Upload
-			<input
-				id="jsonInput"
-				type="file"
-				accept=".json"
-				on:change={handleJsonChange}
-				class="hidden"
-			/>
-		</button>
-	</div>
-	{#if appState.resumeData}
-		<p>Resume data loaded successfully!</p>
-		<!-- Display or use appState.resumeData here -->
-		<pre>{JSON.stringify(appState.resumeData, null, 2)}</pre>
-	{:else}
-		<p>Loading resume data...</p>
-	{/if}
+	<!-- File input to handle JSON uploads -->
+	<input type="file" accept=".json" on:change={handleJsonChange} />
+
+	<!-- Use utility function to get nested property safely -->
+	<h1 class="font-inter font-light">
+		Name: {getNestedProperty(resumeData, 'basics.name', 'Name not available')}
+	</h1>
+	<h1 class="font-garamod">
+		Name: {getNestedProperty(resumeData, 'basics.name', 'Name not available')}
+	</h1>
 </main>

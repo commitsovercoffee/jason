@@ -2,7 +2,12 @@
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				inter: "'Inter Variable', sans-serif",
+				garamod: "'Cormorant Garamond', serif"
+			}
+		}
 	},
 	plugins: [require('@tailwindcss/typography')]
 };
