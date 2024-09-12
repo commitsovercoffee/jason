@@ -7,15 +7,11 @@
 	];
 </script>
 
-<div>
+<ul class="my-4">
 	{#each languages as language}
-		<div class="my-4">
-			<ul>
-				<li class="list-none list-inside">
-					<span class="font-bold">{language.language}:</span>
-					{language.fluency}
-				</li>
-			</ul>
-		</div>
+		<li class="list-none list-inside">
+			<span class="font-bold">{language.language}:</span>
+			{language.fluency}
+		</li>
 	{/each}
-</div>
+</ul>

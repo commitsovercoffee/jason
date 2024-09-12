@@ -197,7 +197,9 @@
 		'p-2 rounded-lg bg-white group hover:bg-[#16423C] active:scale-90 transition-all duration-100 ease-in shadow';
 </script>
 
-<main class="max-w-screen-md mx-auto -mt-32 px-4 py-6 flex flex-col bg-white shadow-lg">
+<main
+	class="max-w-screen-md mx-auto print:m-0 -mt-32 p-4 flex flex-col bg-white print:shadow-none shadow-lg"
+>
 	<div class="flex flex-col gap-4 absolute -ml-20">
 		<a class={buttonStyle} href="/resume.json" download="resume.json">
 			<svg
