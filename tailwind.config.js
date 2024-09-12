@@ -8,6 +8,5 @@ export default {
 				garamod: "'Cormorant Garamond', serif"
 			}
 		}
-	},
-	plugins: [require('@tailwindcss/typography')]
+	}
 };
