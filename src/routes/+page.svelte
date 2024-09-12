@@ -133,7 +133,12 @@
 		]
 	};
 
-	// Function to check for saved data in local storage
+	onMount(() => {
+		if (!checkSavedData()) {
+			loadResumeJson();
+		}
+	});
+
 	function checkSavedData() {
 		const savedData = localStorage.getItem('resumeData');
 		if (savedData) {
@@ -144,14 +149,6 @@
 		return false;
 	}
 
-	onMount(() => {
-		// If no saved data is found, load resume.json
-		if (!checkSavedData()) {
-			loadResumeJson();
-		}
-	});
-
-	// Function to load the resume.json file
 	async function loadResumeJson() {
 		try {
 			const response = await fetch('/resume.json');
@@ -168,7 +165,6 @@
 		}
 	}
 
-	// Function to handle JSON file changes
 	function handleJsonChange(event) {
 		const file = event.target.files[0];
 
@@ -191,24 +187,77 @@
 		}
 	}
 
-	// Safe access to nested properties
 	function getNestedProperty(obj, path, defaultValue = '') {
 		return path
 			.split('.')
 			.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : defaultValue), obj);
 	}
+
+	const buttonStyle =
+		'p-2 rounded-lg bg-white group hover:bg-[#16423C] active:scale-90 transition-all duration-100 ease-in shadow';
 </script>
 
-<main
-	class="print:m-0 max-w-screen-md mx-auto -mt-32 px-6 py-8 flex flex-col space-y-6 bg-white print:shadow-none shadow-lg"
->
-	<a class="p-2 border shadow" href="/resume.json" download="resume.json">
-		<button>Download Resume</button>
-	</a>
+<main class="max-w-screen-md mx-auto -mt-32 px-4 py-6 flex flex-col bg-white shadow-lg">
+	<div class="flex flex-col gap-4 absolute -ml-20">
+		<a class={buttonStyle} href="/resume.json" download="resume.json">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="group-hover:stroke-white"
+				><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline
+					points="7 10 12 15 17 10"
+				/><line x1="12" x2="12" y1="15" y2="3" /></svg
+			>
+		</a>
 
-	<input class="border shadow p-2" type="file" accept=".json" on:change={handleJsonChange} />
+		<button class={buttonStyle} on:click={() => document.getElementById('jsonInput').click()}>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="group-hover:stroke-white"
+				><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path
+					d="M14 2v4a2 2 0 0 0 2 2h4"
+				/><path d="M12 12v6" /><path d="m15 15-3-3-3 3" /></svg
+			>
+			<input
+				id="jsonInput"
+				class="hidden"
+				type="file"
+				accept=".json"
+				on:change={handleJsonChange}
+			/>
+		</button>
 
-	<button class="p-2 border shadow" on:click={loadResumeJson}>Reset</button>
+		<button class={buttonStyle} on:click={loadResumeJson}>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="group-hover:stroke-white"
+				><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg
+			>
+		</button>
+	</div>
 
 	<article>
 		<Who basics={getNestedProperty(resumeData, 'basics')} />
