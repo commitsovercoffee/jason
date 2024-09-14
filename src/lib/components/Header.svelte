@@ -5,9 +5,9 @@
 	export let subtitle = 'Enter subtitle here';
 </script>
 
-<div class="print:hidden bg-[#d5e8e4] pt-20 pb-40">
+<div class="print:hidden bg-[#d4f1ef] pt-20 pb-40">
 	<div class="max-w-screen-md mx-auto flex flex-col items-center gap-4">
-		<h1 class="text-center font-bold text-4xl text-[#16423C]">
+		<h1 class="text-center font-bold text-4xl text-[#15273c]">
 			{title}
 		</h1>
 		<p class="text-center opacity-80">

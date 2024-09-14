@@ -194,12 +194,13 @@
 	}
 
 	const buttonStyle =
-		'p-2 rounded-lg bg-white group hover:bg-[#16423C] active:scale-90 transition-all duration-100 ease-in shadow';
+		'p-2 rounded-lg bg-white group hover:bg-[#15273c] active:scale-90 transition-all duration-100 ease-in shadow';
 </script>
 
 <main
 	class="max-w-screen-md mx-auto print:m-0 -mt-32 p-4 flex flex-col bg-white print:shadow-none shadow-lg"
 >
+	<div class="flex flex-col gap-4 absolute 20"></div>
 	<div class="flex flex-col gap-4 absolute -ml-20">
 		<a class={buttonStyle} href="/resume.json" download="resume.json">
 			<svg
@@ -257,6 +258,35 @@
 				stroke-linejoin="round"
 				class="group-hover:stroke-white"
 				><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg
+			>
+		</button>
+
+		<button
+			class={buttonStyle}
+			on:click={() => {
+				window.print();
+			}}
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="group-hover:stroke-white"
+				><path
+					d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+				/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect
+					x="6"
+					y="14"
+					width="12"
+					height="8"
+					rx="1"
+				/></svg
 			>
 		</button>
 	</div>
