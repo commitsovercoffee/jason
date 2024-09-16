@@ -293,28 +293,43 @@
 
 	<article>
 		<Who basics={getNestedProperty(resumeData, 'basics')} />
-		<Section label="Education">
-			<Education education={getNestedProperty(resumeData, 'education')} />
-		</Section>
+
 		<Section label="Experience">
 			<Experience experience={getNestedProperty(resumeData, 'work')} />
 		</Section>
-		<Section label="Projects">
-			<Projects projects={getNestedProperty(resumeData, 'projects')} />
-		</Section>
-		<Section label="Certificates">
-			<Certificates certificates={getNestedProperty(resumeData, 'certificates')} />
-		</Section>
-		<Section label="Publications">
-			<Publications publications={getNestedProperty(resumeData, 'publications')} />
+
+		{#if getNestedProperty(resumeData, 'projects').length > 0}
+			<Section label="Projects">
+				<Projects projects={getNestedProperty(resumeData, 'projects')} />
+			</Section>
+		{/if}
+
+		<Section label="Education">
+			<Education education={getNestedProperty(resumeData, 'education')} />
 		</Section>
 
-		<Section label="Awards">
-			<Awards awards={getNestedProperty(resumeData, 'awards')} />
-		</Section>
+		{#if getNestedProperty(resumeData, 'certificates').length > 0}
+			<Section label="Certificates">
+				<Certificates certificates={getNestedProperty(resumeData, 'certificates')} />
+			</Section>
+		{/if}
+
+		{#if getNestedProperty(resumeData, 'publications').length > 0}
+			<Section label="Publications">
+				<Publications publications={getNestedProperty(resumeData, 'publications')} />
+			</Section>
+		{/if}
+
+		{#if getNestedProperty(resumeData, 'awards').length > 0}
+			<Section label="Awards">
+				<Awards awards={getNestedProperty(resumeData, 'awards')} />
+			</Section>
+		{/if}
+
 		<Section label="Languages">
 			<Languages languages={getNestedProperty(resumeData, 'languages')} />
 		</Section>
+
 		<Section label="Skills">
 			<Skills skills={getNestedProperty(resumeData, 'skills')} />
 		</Section>
@@ -323,8 +338,10 @@
 			<Interests interests={getNestedProperty(resumeData, 'interests')} />
 		</Section>
 
-		<Section label="References">
-			<References references={getNestedProperty(resumeData, 'references')} />
-		</Section>
+		{#if getNestedProperty(resumeData, 'references').length > 0}
+			<Section label="References">
+				<References references={getNestedProperty(resumeData, 'references')} />
+			</Section>
+		{/if}
 	</article>
 </main>
